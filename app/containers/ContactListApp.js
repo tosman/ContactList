@@ -8,15 +8,25 @@ import React, {
   Component,
   StyleSheet,
   Text,
-  View
+  View,
+  PropTypes
 } from 'react-native';
+import { connect } from 'react-redux';
+
+
 
 class ContactListApp extends Component {
+  static propTypes = {
+    routes: PropTypes.object,
+    contactList: PropTypes.object
+  };
   render() {
     return (
       <View style={styles.container}>
         <Text style={styles.welcome}>
           Hi
+          {this.props.routes.scene.title}
+          {this.props.contactList.contactsById[1].name}
         </Text>
 
       </View>
@@ -42,4 +52,5 @@ const styles = StyleSheet.create({
     marginBottom: 5,
   },
 });
-module.exports = ContactListApp;
+
+export default connect(({contactList, routes}) => ({contactList, routes}))(ContactListApp);
