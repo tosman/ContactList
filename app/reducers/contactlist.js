@@ -4,11 +4,15 @@ import assign from 'lodash/object/assign';
 import mapValues from 'lodash/object/mapValues';
 
 const initialState = {
-  contacts: [1],
+  contacts: [1, 2],
   contactsById: {
     1: {
       id: 1,
       name: 'Theodore Roosevelt'
+    },
+    2: {
+      id: 2,
+      name: 'Tarek Osman'
     }
   }
 }

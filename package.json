@@ -8,9 +8,10 @@
   "dependencies": {
     "react": "^0.14.8",
     "react-native": "^0.24.1",
+    "react-native-gifted-listview": "0.0.14",
     "react-native-router-flux": "^3.22.23",
+    "react-redux": "^4.4.5",
     "redux": "^3.3.1",
-   "redux-thunk": "^2.0.1",
-    "react-redux": "^4.4.5"
+    "redux-thunk": "^2.0.1"
   }
 }
