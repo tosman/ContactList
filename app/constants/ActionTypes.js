@@ -1,3 +1,9 @@
 export const ADD_CONTACT = 'add_contact';
 export const STAR_CONTACT = 'star_contact';
 export const DELETE_CONTACT = 'delete_contact';
+export const REQUEST_CONTACTS = 'request_contacts';
+export const REQUESTING_CONTACTS = 'requesting_contacts';
+export const RECEIVE_CONTACTS = 'receive_contacts';
+export const REQUEST_CONTACT_DETAIL = 'request_contact_detail';
+export const REQUESTING_CONTACT_DETAIL = 'requesting_contact_detail';
+export const RECEIVE_CONTACT_DETAIL = 'receive_contact_detail';

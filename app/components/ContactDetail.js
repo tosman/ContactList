@@ -3,26 +3,26 @@
  * https://github.com/facebook/react-native
  */
 
-import React, {
-  ListView
-  Text,
-  View,
-  PropTypes
-} from 'react-native';
-import { connect } from 'react-redux';
-import mapValues from 'lodash/object/mapValues';
+ import React, {TouchableHighlight, AppRegistry, Component, StyleSheet, ListView, Text, View, PropTypes} from 'react-native';
+ import { connect } from 'react-redux';
+
 
 class ContactDetail extends Component {
   static propTypes = {
-    contactList: PropTypes.object
-  };
-  render() {
-    return (
-      <View style={styles.container}>
-          <Text>
+    id: PropTypes.number.isRequired,
+  }
 
-          </Text>
-      </View>
+  render() {
+    this.contact = this.props.contactList.contactsById[this.props.id];
+
+    return (
+        <View style={styles.container}>
+          <View style={styles.headerInfo}>
+            <Text>
+              {this.contact.name}
+            </Text>
+          </View>
+        </View>
     );
   }
 }
@@ -30,18 +30,18 @@ class ContactDetail extends Component {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
     backgroundColor: '#F5FCFF',
+    paddingTop: 64
   },
-  welcome: {
-    fontSize: 20,
-    textAlign: 'center',
-    margin: 10,
+  headerInfo: {
+    flex: 1,
+    paddingTop: 64,
+    backgroundColor: '#FDFDFD',
   },
-  instructions: {
-    textAlign: 'center',
-    color: '#333333',
-    marginBottom: 5,
-  },
+
+  contactDetails: {
+    flex: 2
+  }
 });
+
+export default connect(contactList => contactList)(ContactDetail);
