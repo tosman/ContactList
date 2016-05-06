@@ -14,7 +14,7 @@ import thunkMiddleware from 'redux-thunk'
 
 const RouterWithRedux = connect()(Router);
 const store = compose(applyMiddleware(
-    thunkMiddleware, // lets us dispatch() functions
+    thunkMiddleware, 
   )
 )(createStore)(reducers);
 

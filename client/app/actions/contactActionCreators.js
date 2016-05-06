@@ -1,5 +1,4 @@
 import * as types from '../constants/ActionTypes';
-import fetch from 'isomorphic-fetch'
 
 
 export function addContact(name)  {
@@ -42,10 +41,13 @@ export function requestContacts() {
   return function (dispatch) {
     dispatch(requestingContacts())
 
-    return fetch(`http://localhost:3000/contacts`)
+    return fetch(`http://192.168.0.2:3000/contacts`)
       .then(response => response.json())
       .then(json =>
-        dispatch(receiveContacts(json))
+        {
+          console.log('hi');
+          dispatch(receiveContacts(json));
+        }
       ).catch(resp => console.log(resp))
   }
 }
@@ -66,8 +68,7 @@ export function requestingContactDetail(id){
 export function requestContactDetail(id){
   return function (dispatch) {
     dispatch(requestingContacts())
-
-    return fetch(`http://localhost:3000/contact`)
+    return fetch(`http://192.168.0.2:3000/contact`)
       .then(response => response.json())
       .then(json =>
         dispatch(receiveContactDetail(json))

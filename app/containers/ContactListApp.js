@@ -55,13 +55,10 @@ class ContactListApp extends Component {
     return(
       <View style={styles.container}>
 
-        <ControlledRefreshableListView
+        <ListView
           dataSource={dataSource}
           renderRow={(data) => this.renderRow(data)}
-          isRefreshing={this.props.contactList.isFetching}
-          onRefresh={this.props.requestContacts}
-          onPull={this.props.requestContacts}
-          refreshDescription="Getting Contacts"
+
        />
 
       </View>

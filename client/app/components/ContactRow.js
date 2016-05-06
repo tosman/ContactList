@@ -51,9 +51,9 @@ export default class ContactRow extends Component {
 const styles = StyleSheet.create({
     image: {
         margin: 8,
-        width: 64,
-        height: 64,
-        borderRadius: 32
+        width: 50,
+        height: 50,
+        borderRadius: 25
     },
     detail: {
         fontSize: 14,
@@ -70,7 +70,7 @@ const styles = StyleSheet.create({
     row: {
         flex: 1,
         flexDirection: 'row',
-        padding: 10,
+        padding: 5,
         borderBottomWidth: 1,
         borderColor: '#d7d7d7'
     }

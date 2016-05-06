@@ -59,7 +59,7 @@ function receiveContactDetail(state, action){
   var contact = {[action.contactDetail.id]: action.contactDetail}
   return {...state,
     isFetching: false,
-    contactsById: {...state.contactsById, contact}
+    contactsById: {...state.contactsById, ...contact}
   }
 }
 
