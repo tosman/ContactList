@@ -4,11 +4,22 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "lab -c"
   },
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "hapi": "^13.3.0"
+    "bell": "^7.1.0",
+    "boom": "^3.1.2",
+    "handlebars": "^4.0.5",
+    "hapi": "^13.0.0",
+    "inert": "^3.2.0",
+    "joi": "^8.0.4",
+    "socket.io": "^1.4.5",
+    "vision": "^4.0.1"
+  },
+  "devDependencies": {
+    "code": "^2.0.1",
+    "lab": "^10.2.0"
   }
 }

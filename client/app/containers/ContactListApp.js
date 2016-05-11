@@ -28,8 +28,7 @@ class ContactListApp extends Component {
         super(props);
         this.dataSource = new ListView.DataSource({
             rowHasChanged: (row1, row2) => row1 !== row2
-        })
-
+        });
     }
     componentDidMount() {
         this.props.dispatch(contactActions.requestContacts());

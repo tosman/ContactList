@@ -19,8 +19,9 @@ const data = [{
     photo: 'http://spinoff.comicbookresources.com/wp-content/uploads/2016/03/luke-skywalker.jpg'
 }, {
     id: 3,
-    name: 'Renzo Saldana',
-    staffType: 'Doctor'
+    name: 'Chewbacca',
+    staffType: 'Doctor',
+    photo: 'http://static.trustedreviews.com/94/000036c5a/e74f/chewbacca.jpeg'
 }];
 
 
@@ -28,18 +29,14 @@ server.route({
     method: 'GET',
     path: '/contacts',
     handler: function(request, reply) {
-      console.log('hi1');
-        setTimeout(function() {
-            reply(data)
-        }, 2000);
+      reply(data);
     }
 });
 
 server.route({
     method: 'GET',
-    path: '/contact',
+    path: '/contact/{id}',
     handler: function(request, reply) {
-      console.log('hi2');
         var detail = {
             id: 1,
             name: 'Han Solo',
@@ -58,3 +55,5 @@ server.start((err) => {
     }
     console.log('Server running at:', server.info.uri);
 });
+
+module.exports = server;
