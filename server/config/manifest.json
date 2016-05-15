@@ -20,6 +20,8 @@
         }
       }
     },
+    { "plugin": "bell" },
+    { "plugin": "hapi-auth-cookie" },
     {
       "plugin": {
         "register": "good",

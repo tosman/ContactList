@@ -1,3 +1,5 @@
+const Joi = require('joi');
+
 const data = [{
     id: 1,
     name: 'Han Solo',
@@ -16,21 +18,35 @@ const data = [{
 }];
 
 module.exports.getContacts = {
-  handler: function (request, reply) {
-    return reply(data);
-  }
+    handler: function(request, reply) {
+        return reply(data);
+    }
 };
 
-module.exports.getContact = {
-  handler: function (request, reply) {
-    var detail = {
-        id: 1,
-        name: 'Han Solo',
-        staffType: 'Aweomse',
-        photo: 'http://screenrant.com/wp-content/uploads/young-han-solo-star-wars-movie-casting.jpg',
-        address: '1200 N Hartford St',
-        phoneNumber: '7035979822'
+module.exports.addContact = {
+    handler: function(request, reply){
+      return reply(200);
+    },
+    validate: {
+      payload: {
+        contact: {
+          email: Joi.string().email().required(),
+          name: Joi.string().required(),
+          phoneNumber: Joi.string().required()
+        }
+      }
     }
-    reply(detail);
-  }
+}
+module.exports.getContact = {
+    handler: function(request, reply) {
+        var detail = {
+            id: 1,
+            name: 'Han Solo',
+            staffType: 'Aweomse',
+            photo: 'http://screenrant.com/wp-content/uploads/young-han-solo-star-wars-movie-casting.jpg',
+            address: '1200 N Hartford St',
+            phoneNumber: '7035979822'
+        }
+        reply(detail);
+    }
 }

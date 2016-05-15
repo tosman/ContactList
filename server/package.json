@@ -4,24 +4,26 @@
   "description": "",
   "main": "server.js",
   "scripts": {
-      "test": "./node_modules/lab/bin/lab -v",
-      "start": "node server.js",
-      "lint": "eslint . --ext .js --ignore node_modules/**"
-    },
+    "test": "./node_modules/lab/bin/lab -v",
+    "start": "node server.js",
+    "lint": "eslint . --ext .js --ignore node_modules/**"
+  },
   "author": "",
   "license": "ISC",
-
   "dependencies": {
+    "bell": "^7.6.1",
     "glue": "^3.2.0",
-    "hapi": "^13.3.0",
-    "hapi-auth-jwt2": "^6.0.0",
     "good": "^7.0.0",
-    "good-console": "^6.1.1"
+    "good-console": "^6.1.1",
+    "hapi": "^13.3.0",
+    "hapi-auth-cookie": "^6.1.1",
+    "hapi-auth-jwt2": "^6.0.0"
   },
   "devDependencies": {
     "blipp": "^2.3.0",
     "code": "^2.2.1",
     "eslint": "^2.9.0",
+    "joi": "^8.1.0",
     "lab": "^10.4.0"
   },
   "eslintConfig": {
