@@ -19,9 +19,12 @@ import {
     Schema,
     Actions,
     Reducer
-} from 'react-native-router-flux'
-import ContactListApp from './containers/ContactListApp'
-import ContactDetail from './components/ContactDetail'
+} from 'react-native-router-flux';
+import ContactListApp from './containers/ContactListApp';
+import ContactDetail from './components/ContactDetail';
+import Login from './containers/Login';
+import Register from './containers/Register';
+
 import {Provider, connect} from 'react-redux';
 import reducers from './reducers';
 import {createStore, applyMiddleware, compose} from 'redux';
@@ -38,10 +41,16 @@ class App extends Component {
         return (
             <Provider store={store}>
                 <RouterWithRedux>
+                  <Scene key="modal" component={Modal} >
                     <Scene key="root">
-                        <Scene key="contactList" initial={true} component={ContactListApp} title="Contact List"/>
+                        <Scene key="register"  >
+                         <Scene key="registerModal" hideNavBar={true} component={Register} title="Register"/>
+                        </Scene>
+                        <Scene key="login" initial={true} component={Login} title="Login"/>
+                        <Scene key="contactList"  component={ContactListApp} title="Contact List"/>
                         <Scene key="contactDetail" component={ContactDetail} title="Contact Detail"/>
                     </Scene>
+                  </Scene>
                 </RouterWithRedux>
             </Provider>
         );

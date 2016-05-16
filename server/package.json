@@ -11,13 +11,14 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "bcrypt": "^0.8.6",
     "bell": "^7.6.1",
     "glue": "^3.2.0",
     "good": "^7.0.0",
     "good-console": "^6.1.1",
     "hapi": "^13.3.0",
     "hapi-auth-cookie": "^6.1.1",
-    "hapi-auth-jwt2": "^6.0.0"
+    "redis-connection": "^4.0.3"
   },
   "devDependencies": {
     "blipp": "^2.3.0",

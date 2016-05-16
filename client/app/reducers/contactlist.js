@@ -11,7 +11,8 @@ import _ from 'lodash';
 const initialState = {
   isFetching: false,
   contacts: [],
-  contactsById: {}
+  contactsById: {},
+  loginStatus: ''
 }
 
 const actionMapping = {
@@ -21,6 +22,9 @@ const actionMapping = {
   [types.RECEIVE_CONTACTS]: receiveContacts,
   [types.REQUEST_CONTACT_DETAIL]: requestContactDetail,
   [types.RECEIVE_CONTACT_DETAIL]: receiveContactDetail,
+  [types.LOGGING_IN]: loggingIn,
+  [types.LOG_IN_FAILED]: loginFailed,
+  [types.LOG_IN_SUCCEEDED]: loginSucceeded,
   default: state => state
 }
 
@@ -29,6 +33,32 @@ export default function reducer(state = initialState, action) {
 }
 
 
+
+// AUTH
+
+function loggingIn(state, action){
+  return {
+    ...state,
+    loginStatus: 'pending'
+  }
+}
+
+function loginSucceeded(state, action){
+  return {
+    ...state,
+    user: action.user,
+    loginStatus: 'success'
+  }
+}
+
+function loginFailed(state, action){
+  return {
+    ...state,
+    loginStatus: 'failed'
+  }
+}
+
+//CONTACTS
 
 function deleteContact(state, action){
     return {

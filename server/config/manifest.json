@@ -20,6 +20,14 @@
         }
       }
     },
+    {
+      "plugin": "./auth",
+      "options": {
+        "routes": {
+          "prefix": "/auth"
+        }
+      }
+    },
     { "plugin": "bell" },
     { "plugin": "hapi-auth-cookie" },
     {
