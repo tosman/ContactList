@@ -1,4 +1,7 @@
+"use strict";
+
 const Joi = require('joi');
+const redisClient = require('redis-connection')();
 
 const data = [{
     id: 1,
@@ -19,13 +22,38 @@ const data = [{
 
 module.exports.getContacts = {
     handler: function(request, reply) {
-        return reply(data);
+        const email = request.auth.credentials.email;
+
+        redisClient.get('contacts', function(err, resp){
+            var contacts = resp ? JSON.parse(resp) : {};
+
+            return reply(contacts[email] || []);
+        });
     }
 };
 
 module.exports.addContact = {
     handler: function(request, reply){
-      return reply(200);
+      let email = request.auth.credentials.email;
+
+      redisClient.get('contacts', function(err, resp){
+          var contacts = resp ? JSON.parse(resp) : {};
+          //TODO: add babel for this:
+          //contacts[email] = [...contacts[email], request.payload.contact];
+          redisClient.incr('contact', function(err, resp){
+
+            request.payload.contact.id = resp;
+            if(contacts[email]){
+              contacts[email].push(request.payload.contact);
+            } else {
+              contacts[email] = [request.payload.contact];
+            }
+
+            redisClient.set('contacts', JSON.stringify(contacts))
+          });
+
+          reply(200);
+      });
     },
     validate: {
       payload: {
@@ -39,14 +67,7 @@ module.exports.addContact = {
 }
 module.exports.getContact = {
     handler: function(request, reply) {
-        var detail = {
-            id: 1,
-            name: 'Han Solo',
-            staffType: 'Aweomse',
-            photo: 'http://screenrant.com/wp-content/uploads/young-han-solo-star-wars-movie-casting.jpg',
-            address: '1200 N Hartford St',
-            phoneNumber: '7035979822'
-        }
-        reply(detail);
+
+        reply({});
     }
 }

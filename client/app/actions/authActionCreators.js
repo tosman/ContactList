@@ -37,15 +37,11 @@ export function login(loginData){
     }).then(response => {
       console.log(response);
         if(response.ok){
-          return response.json()
+          dispatch(loginSucceeded(response.json()))
         } else {
-          throw ' oh noo ';
+          reject()
         }
-     })
-      .then(json =>{
-        dispatch(loginSucceeded(json))
-      }
-      ).catch(resp => dispatch(loginFailed(resp)))
+     }).catch(resp => dispatch(loginFailed(resp)))
   }
 }
 

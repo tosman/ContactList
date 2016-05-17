@@ -46,7 +46,7 @@ class App extends Component {
                         <Scene key="register"  >
                          <Scene key="registerModal" hideNavBar={true} component={Register} title="Register"/>
                         </Scene>
-                        <Scene key="login" initial={true} component={Login} title="Login"/>
+                        <Scene key="login" hideNavBar={true} initial={true} component={Login} title="Login"/>
                         <Scene key="contactList"  component={ContactListApp} title="Contact List"/>
                         <Scene key="contactDetail" component={ContactDetail} title="Contact Detail"/>
                     </Scene>

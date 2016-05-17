@@ -42,6 +42,7 @@ module.exports.login = {
         let data = JSON.parse(res);
          bcrypt.compare(request.payload.password, data.password, function (err, isValid) {
              if(!err && isValid) {
+               request.cookieAuth.set(data);
                return reply({}); // or what ever you want to rply
              } else {
                return reply().code(400);

@@ -97,7 +97,9 @@ const mapStateToProps = (state) => {
 const mapDispatchToProps = (dispatch) => {
     return {
         onLoginClick: (loginData) => {
-            dispatch(authActions.login(loginData));
+            dispatch(authActions.login(loginData)).then(function(){
+              Actions.contactList();
+            });
         },
         onRegisterClick: () =>{
             Actions.register();

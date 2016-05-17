@@ -3,6 +3,7 @@
 const Glue = require('glue');
 const Hapi = require('hapi');
 const manifest = require('./config/manifest.json');
+var redisClient = require('redis-connection')();
 
 if (!process.env.PRODUCTION) {
   manifest.registrations.push({
@@ -21,7 +22,8 @@ Glue.compose(manifest, { relativeTo: __dirname }, (err, server) => {
   server.auth.strategy('base', 'cookie', {
     password: 'noideawhattoputherebutneedstobeatleast32characterslong', // cookie secret
     cookie: 'app-cookie', // Cookie name
-    ttl: 24 * 60 * 60 * 1000 // Set session to 1 day
+    ttl: 24 * 60 * 60 * 1000,// Set session to 1 day,
+    isSecure: false
   });
 
   server.auth.default({

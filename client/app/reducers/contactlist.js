@@ -32,8 +32,6 @@ export default function reducer(state = initialState, action) {
   return (actionMapping[action.type] || actionMapping['default'])(state, action);
 }
 
-
-
 // AUTH
 
 function loggingIn(state, action){
