@@ -98,7 +98,7 @@ const mapDispatchToProps = (dispatch) => {
     return {
         onLoginClick: (loginData) => {
             dispatch(authActions.login(loginData)).then(function(){
-              Actions.contactList();
+              // Actions.contactList();
             });
         },
         onRegisterClick: () =>{

@@ -20,7 +20,6 @@ export default class ContactRow extends Component {
         id: PropTypes.number.isRequired,
         name: PropTypes.string.isRequired,
         photo: PropTypes.string,
-        staffType: PropTypes.string.isRequired,
         selectContact: PropTypes.func.isRequired
     }
 

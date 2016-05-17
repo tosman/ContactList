@@ -21,6 +21,7 @@ module.exports.register = {
               bcrypt.hash(request.payload.password, salt, function(err, hash) {
                 request.payload.password = hash; // save the password's hash
                 redisClient.set(request.payload.email, JSON.stringify(request.payload));
+                request.cookieAuth.set(data);
                 return reply('Success')
               }); // end bcrypt.hash
             }); // end bcrypt.genSalt

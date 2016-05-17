@@ -1,5 +1,6 @@
 import * as types from '../constants/ActionTypes';
 import {settings} from '../settings'
+import {Actions} from 'react-native-router-flux';
 
 export function loggingIn(){
   return {
@@ -38,8 +39,9 @@ export function login(loginData){
       console.log(response);
         if(response.ok){
           dispatch(loginSucceeded(response.json()))
+          Actions.contactList();
         } else {
-          reject()
+          throw 'err';
         }
      }).catch(resp => dispatch(loginFailed(resp)))
   }
@@ -76,8 +78,14 @@ export function register(registerData){
       },
       body: JSON.stringify(registerData)
     }).then(response => response.json())
-      .then(json =>
-        dispatch(registerSucceeded(json))
+      .then(json =>{
+        if(json.ok){
+          dispatch(registerSucceeded(json));
+          Actions.contactList();
+        } else {
+          throw json
+        }
+      }
       ).catch(resp => dispatch(registerFailed(resp)))
   }
 }
