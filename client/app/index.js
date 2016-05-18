@@ -24,6 +24,7 @@ import ContactListApp from './containers/ContactListApp';
 import ContactDetail from './components/ContactDetail';
 import Login from './containers/Login';
 import Register from './containers/Register';
+import AddContact from './containers/AddContact';
 
 import {Provider, connect} from 'react-redux';
 import reducers from './reducers';
@@ -43,12 +44,13 @@ class App extends Component {
                 <RouterWithRedux>
                   <Scene key="modal" component={Modal} >
                     <Scene key="root">
-                        <Scene key="register"  >
-                         <Scene key="registerModal" hideNavBar={true} component={Register} title="Register"/>
+                        <Scene key="register" direction="vertical" >
+                         <Scene key="registerModal" schema="modal" hideNavBar={true} component={Register} title="Register"/>
                         </Scene>
                         <Scene key="login" hideNavBar={true} initial={true} component={Login} title="Login"/>
-                        <Scene key="contactList"  component={ContactListApp} title="Contact List"/>
+                        <Scene key="contactList"  component={ContactListApp} title="Contact List" onRight={()=>Actions.addContact()} rightTitle="Right"/>
                         <Scene key="contactDetail" component={ContactDetail} title="Contact Detail"/>
+                        <Scene key="addContact" component={AddContact} title="AddContact"/>
                     </Scene>
                   </Scene>
                 </RouterWithRedux>

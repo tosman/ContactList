@@ -68,11 +68,53 @@ export function requestingContactDetail(id){
 }
 export function requestContactDetail(id){
   return function (dispatch) {
-    dispatch(requestingContacts())
+    dispatch(requestingContacts());
     return fetch(settings.serverUrl + '/api/contact')
       .then(response => response.json())
       .then(json =>
         dispatch(receiveContactDetail(json))
       ).catch(resp => console.log(resp))
+  }
+}
+
+export function addingContact(){
+  return {
+    type: types.ADDING_CONTACT
+  }
+}
+export function addContactSucceeded(contact){
+  return {
+    type: types.ADD_CONTACT_SUCCEEDED,
+    contact
+  }
+}
+
+export function addContactFailed(response){
+  return {
+    type: types.ADD_CONTACT_FAILED,
+    response
+  }
+}
+export function addContact(data){
+  return function (dispatch){
+    dispatch(addingContact());
+    return fetch(settings.serverUrl + '/api/contacts', {
+      method: 'POST',
+      headers: {
+       'Accept': 'application/json',
+       'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(data)
+    }).then(response => {
+      console.log(response);
+        if(response.ok){
+          var contact = data;
+          contact.id = response.json();
+          dispatch(addContactSucceeded(response.json()))
+          Actions.contactList();
+        } else {
+          throw 'err';
+        }
+     }).catch(resp => dispatch(addContactFailed(resp)))
   }
 }

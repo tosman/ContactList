@@ -1,4 +1,3 @@
-export const ADD_CONTACT = 'eh_add_contact';
 export const STAR_CONTACT = 'eh_star_contact';
 export const DELETE_CONTACT = 'eh_delete_contact';
 export const REQUEST_CONTACTS = 'eh_request_contacts';
@@ -17,3 +16,10 @@ export const REGISTER = 'eh_register';
 export const REGISTERING = 'eh_registering';
 export const REGISTER_SUCCEEDED = 'eh_register_succeeded';
 export const REGISTER_FAILED = 'eh_register_failed';
+
+
+
+export const ADD_CONTACT = 'eh_add_contact';
+export const ADDING_CONTACT = 'eh_adding_contact';
+export const ADD_CONTACT_SUCCEEDED = 'eh_add_contact_succeeded';
+export const ADD_CONTACT_FAILED = 'eh_add_contact_failed';

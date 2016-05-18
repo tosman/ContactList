@@ -35,39 +35,38 @@ module.exports.getContacts = {
 module.exports.addContact = {
     handler: function(request, reply){
       let email = request.auth.credentials.email;
+      let contact = request.payload;
 
       redisClient.get('contacts', function(err, resp){
           var contacts = resp ? JSON.parse(resp) : {};
           //TODO: add babel for this:
           //contacts[email] = [...contacts[email], request.payload.contact];
-          redisClient.incr('contact', function(err, resp){
+          redisClient.incr('contact', function(err, contactId){
 
-            request.payload.contact.id = resp;
+          contact.id = contactId;
             if(contacts[email]){
-              contacts[email].push(request.payload.contact);
+              contacts[email].push(contact);
             } else {
-              contacts[email] = [request.payload.contact];
+              contacts[email] = [contact];
             }
+            redisClient.set('contacts', JSON.stringify(contacts));
 
-            redisClient.set('contacts', JSON.stringify(contacts))
+            reply(contactId);
           });
 
-          reply(200);
       });
     },
     validate: {
       payload: {
-        contact: {
-          email: Joi.string().email().required(),
-          name: Joi.string().required(),
-          phoneNumber: Joi.string().required()
-        }
+        email: Joi.string().email().required(),
+        name: Joi.string().required(),
+        phoneNumber: Joi.string().required()
       }
     }
 }
 module.exports.getContact = {
     handler: function(request, reply) {
 
-        reply({});
+        reply(200);
     }
 }

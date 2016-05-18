@@ -84,11 +84,7 @@ function requestContactDetail(state, action){
 }
 
 function receiveContactDetail(state, action){
-  var contact = {[action.contactDetail.id]: action.contactDetail}
-  return {...state,
-    isFetching: false,
-    contactsById: {...state.contactsById, ...contact}
-  }
+  return state;
 }
 
 function receiveContacts(state, action){
