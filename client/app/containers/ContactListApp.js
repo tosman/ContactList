@@ -46,7 +46,7 @@ class ContactListApp extends Component {
         const dataSource = this.dataSource.cloneWithRows(Object.values(this.props.contactList.contactsById))
         return (
             <View style={styles.container}>
-                <ListView dataSource={dataSource} renderHeader={() => this.renderHeader()} renderRow={(data) => this.renderRow(data)} enableEmptySections={true}/>
+                <ListView dataSource={dataSource}  renderRow={(data) => this.renderRow(data)} enableEmptySections={true}/>
             </View>
         );
     }
@@ -56,7 +56,7 @@ const styles = StyleSheet.create({
     container: {
         flex: 1,
         backgroundColor: '#F5FCFF',
-        paddingTop: 55
+        paddingTop: 65
     },
     wrapper: {
         marginTop: 10

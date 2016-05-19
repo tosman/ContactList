@@ -48,7 +48,7 @@ class App extends Component {
                          <Scene key="registerModal" schema="modal" hideNavBar={true} component={Register} title="Register"/>
                         </Scene>
                         <Scene key="login" hideNavBar={true} initial={true} component={Login} title="Login"/>
-                        <Scene key="contactList"  component={ContactListApp} title="Contact List" onRight={()=>Actions.addContact()} rightTitle="Right"/>
+                        <Scene key="contactList"  navigationBarStyle={{backgroundColor:"#D8D8D8"}} component={ContactListApp} title="Contact List" onRight={()=>Actions.addContact()} rightTitle="Right"/>
                         <Scene key="contactDetail" component={ContactDetail} title="Contact Detail"/>
                         <Scene key="addContact" component={AddContact} title="AddContact"/>
                     </Scene>

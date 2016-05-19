@@ -52,7 +52,9 @@ const styles = StyleSheet.create({
         margin: 8,
         width: 50,
         height: 50,
-        borderRadius: 25
+        borderRadius: 25,
+        borderColor: '#FF3366',
+        borderWidth: .5
     },
     detail: {
         fontSize: 14,

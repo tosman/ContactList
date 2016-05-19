@@ -66,12 +66,14 @@ class Login extends Component {
                       />
                   </View>
               </View>
+              <TouchableHighlight onPress={() => this.props.onLoginClick(this.state)}>
+
               <View style={styles.signin}>
-                <TouchableHighlight onPress={() => this.props.onLoginClick(this.state)}>
                   <Text style={styles.whiteFont}>Sign In</Text>
-                  </TouchableHighlight>
 
               </View>
+            </TouchableHighlight>
+
               <View style={styles.signup}>
                   <Text style={styles.greyFont}>Don't have an account? </Text>
                     <TouchableHighlight onPress={this.props.onRegisterClick}>
@@ -81,64 +83,7 @@ class Login extends Component {
           </View>
       );
     }
-    render2() {
-        return (
-            <View style={styles.container}>
-              <Text style={styles.header}> My Contacts </Text>
-              <TextInput
-                style={styles.input}
-                onChangeText={(text) => this.setState({username: text})}
-                autoCorrect={false}
-                autoCapitalize={'none'}
-                value={this.state.username}
-                />
-
-              <TextInput
-                style={styles.input}
-                onChangeText={(text) => this.setState({password: text})}
-                secureTextEntry={true}
-                value={this.state.password}
-                />
-
-                <Button
-                  style={styles.button}
-                  isLoading={this.props.loginStatus === 'pending'}
-                  onPress={() => this.props.onLoginClick(this.state)} >
-                  Login
-                </Button>
-
-                <Button
-                  style={styles.button}
-                  onPress={() => this.props.onRegisterClick()} >
-                  Register
-                </Button>
-            </View>
-        );
-    }
 }
-
-// const styles = StyleSheet.create({
-//     input: {
-//       height: 40,
-//       borderColor: 'gray',
-//       borderWidth: 1,
-//       margin: 20
-//     },
-//     button: {
-//       height: 40,
-//       margin: 20
-//     },
-//     container: {
-//         flex: 1,
-//         backgroundColor: '#F5FCFF',
-//         paddingTop: 65
-//     },
-//     header: {
-//       fontSize: 24,
-//       textAlign:'center',
-//     }
-//
-// });
 
 var styles = StyleSheet.create({
     container: {
