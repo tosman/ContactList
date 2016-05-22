@@ -2,7 +2,11 @@
 
 const Joi = require('joi');
 const redisClient = require('redis-connection')();
+const Boom = require('boom');
+const Inert = require('inert');
+const _ = require('lodash');
 
+const imageFolder = "contactImages";
 const data = [{
     id: 1,
     name: 'Han Solo',
@@ -23,14 +27,36 @@ const data = [{
 module.exports.getContacts = {
     handler: function(request, reply) {
         const email = request.auth.credentials.email;
-
         redisClient.get('contacts', function(err, resp){
             var contacts = resp ? JSON.parse(resp) : {};
+            contacts = contacts[email] || [];
 
-            return reply(contacts[email] || []);
+            _.forEach(contacts, (contact)=>{
+              contact.image = getContactImageFullUrl(contact.id);
+            })
+            return reply(contacts);
         });
     }
 };
+
+function getContactImageFullUrl(id){
+  return "/api/contact/" + getContactImageUrl(id);
+}
+
+function getImageName(id){
+  return "contact" + id + ".jpeg";
+}
+
+function getContactImageUrl(id){
+  return "contactImages/" + getImageName(id);
+}
+
+module.exports.getImage = {
+  handler: function(request, reply){
+     reply.file(getContactImageUrl(request.params.contactId));
+  }
+}
+
 
 module.exports.addContact = {
     handler: function(request, reply){
@@ -43,15 +69,23 @@ module.exports.addContact = {
           //contacts[email] = [...contacts[email], request.payload.contact];
           redisClient.incr('contact', function(err, contactId){
 
-          contact.id = contactId;
-            if(contacts[email]){
-              contacts[email].push(contact);
-            } else {
-              contacts[email] = [contact];
-            }
-            redisClient.set('contacts', JSON.stringify(contacts));
+            require("fs").writeFile(getContactImageUrl(contactId), contact.image, 'base64', function(err) {
+              if(err){
+                Boom.reply('test');
+              }
 
-            reply(contactId);
+              contact.id = contactId;
+              contact.image = getImageName(contactId);
+              if(contacts[email]){
+                contacts[email].push(contact);
+              } else {
+                contacts[email] = [contact];
+              }
+              redisClient.set('contacts', JSON.stringify(contacts));
+
+              reply(contactId);
+            });
+
           });
 
       });
@@ -60,7 +94,8 @@ module.exports.addContact = {
       payload: {
         email: Joi.string().email().required(),
         name: Joi.string().required(),
-        phoneNumber: Joi.string().required()
+        phoneNumber: Joi.string().required(),
+        image: Joi.string()
       }
     }
 }

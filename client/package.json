@@ -9,16 +9,20 @@
     "apsl-react-native-button": "^2.5.0",
     "es6-promise": "^3.1.2",
     "lodash": "^4.11.2",
+    "material-icons": "^0.1.0",
     "react": "^0.14.8",
     "react-native": "^0.24.1",
+    "react-native-action-button": "^1.1.5",
     "react-native-gifted-listview": "0.0.14",
     "react-native-image-picker": "^0.18.15",
     "react-native-refreshable-listview": "^2.0.0-beta4",
     "react-native-router-flux": "^3.22.23",
     "react-native-search-bar": "^2.10.0",
+    "react-native-vector-icons": "^2.0.2",
     "react-redux": "^4.4.5",
     "redux": "^3.3.1",
     "redux-logger": "^2.6.1",
-    "redux-thunk": "^2.0.1"
+    "redux-thunk": "^2.0.1",
+    "undefined": "^0.1.0"
   }
 }

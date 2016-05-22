@@ -10,7 +10,9 @@ import React, {
     Component,
     StyleSheet,
     ListView,
+    ScrollView,
     Text,
+    Image,
     View,
     PropTypes,
     TextInput,
@@ -22,6 +24,7 @@ import * as contactActions from '../actions/contactActionCreators'
 import {Actions} from 'react-native-router-flux';
 import Button from 'apsl-react-native-button'
 var ImagePickerManager = require('NativeModules').ImagePickerManager;
+import ContactEmptyImage from '../components/ContactEmptyImage';
 
 class AddContact extends Component {
     state = {
@@ -32,44 +35,27 @@ class AddContact extends Component {
     constructor(props) {
         super(props);
     }
-    selectImage(){
-      var options = {
-        title: 'Select Avatar', // specify null or empty string to remove the title
-        cancelButtonTitle: 'Cancel',
-        takePhotoButtonTitle: 'Take Photo...', // specify null or empty string to remove this button
-        chooseFromLibraryButtonTitle: 'Choose from Library...', // specify null or empty string to remove this button
-        customButtons: {
-          'Choose Photo from Facebook': 'fb', // [Button Text] : [String returned upon selection]
-        },
-        cameraType: 'back', // 'front' or 'back'
-        mediaType: 'photo', // 'photo' or 'video'
-        videoQuality: 'high', // 'low', 'medium', or 'high'
-        durationLimit: 10, // video recording max time in seconds
-        maxWidth: 100, // photos only
-        maxHeight: 100, // photos only
-        aspectX: 2, // android only - aspectX:aspectY, the cropping image's ratio of width to height
-        aspectY: 1, // android only - aspectX:aspectY, the cropping image's ratio of width to height
-        quality: 0.2, // 0 to 1, photos only
-        angle: 0, // android only, photos only
-        allowsEditing: false, // Built in functionality to resize/reposition the image after selection
-        noData: false, // photos only - disables the base64 `data` field from being generated (greatly improves performance on large photos)
-        storageOptions: { // if this key is provided, the image will get saved in the documents directory on ios, and the pictures directory on android (rather than a temporary directory)
-          skipBackup: true, // ios only - image will NOT be backed up to icloud
-          path: 'images' // ios only - will save image at /Documents/images rather than the root
-        }
-      };
 
-      ImagePickerManager.launchImageLibrary(options, (response) => {
-        console.log(response);
+
+    addClick(){
+      this.props.onAddClick({
+        image: this.state.image,
+        email: this.state.email,
+        phoneNumber: this.state.phoneNumber,
+        name: this.state.name
       });
     }
+
     render() {
         return (
-            <View style={styles.container}>
+            <ScrollView style={styles.container}>
+              <ContactEmptyImage onSelectImage={(image) => this.setState({image})}/>
+              <View style={styles.form}>
               <TextInput
                 style={styles.input}
                 onChangeText={(text) => this.setState({email: text})}
                 autoCorrect={false}
+                placeholder={"Email"}
                 autoCapitalize={'none'}
                 value={this.state.email}
                 />
@@ -77,36 +63,40 @@ class AddContact extends Component {
               <TextInput
                 style={styles.input}
                 onChangeText={(text) => this.setState({name: text})}
+                placeholder={"Name"}
                 value={this.state.name}
                 />
 
                 <TextInput
                   style={styles.input}
-
+                  placeholder={"Phone Number"}
                   onChangeText={(text) => this.setState({phoneNumber: text})}
                   value={this.state.phoneNumber}
                   />
-
-                <Button
-                  style={styles.button}
-                  onPress={() => this.selectImage()} >
-                  Select image
-                </Button>
 
 
                 <Button
                   style={styles.button}
                   isLoading={this.props.loginStatus === 'pending'}
-                  onPress={() => this.props.onAddClick(this.state)} >
+                  onPress={() => this.addClick()} >
                   Login
                 </Button>
-
-            </View>
+                </View>
+            </ScrollView>
         );
     }
 }
 
 const styles = StyleSheet.create({
+    image: {
+      height:250,
+      position: 'absolute',
+      top: 0,
+      left: 0,
+      bottom: 0,
+      right: 0,
+      flex:1
+    },
     input: {
       height: 40,
       borderColor: 'gray',
@@ -121,6 +111,8 @@ const styles = StyleSheet.create({
         flex: 1,
         backgroundColor: '#F5FCFF',
         paddingTop: 65
+    },
+    form:{
     },
     header: {
       fontSize: 24,

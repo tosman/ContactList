@@ -16,7 +16,7 @@ const initialState = {
 }
 
 const actionMapping = {
-  [types.ADD_CONTACT]: addContact,
+  [types.ADD_CONTACT_SUCCEEDED]: addContactSucceeded,
   [types.DELETE_CONTACT]: deleteContact,
   [types.REQUESTING_CONTACTS]: requestContacts,
   [types.RECEIVE_CONTACTS]: receiveContacts,
@@ -64,13 +64,12 @@ function deleteContact(state, action){
       contactsById: omit(state.contactsById, action.id)
     };
 }
-function addContact(state, action) {
-  const newId = state.contacts.length + 1;
+function addContactSucceeded(state, action) {
+  let contact = action.contact;
   return {
-    contacts: [...state.contacts, newId],
+    contacts: [...state.contacts, contact.id],
     contactsById: {...state.contactsById,
-     [newId]: {id: newId,
-      name: action.name}
+     [contact.id]: contact
     }
   };
 }

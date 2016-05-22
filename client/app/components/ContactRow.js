@@ -14,12 +14,13 @@ import React, {
     View,
     PropTypes
 } from 'react-native';
+import {settings} from '../settings';
 
 export default class ContactRow extends Component {
     static propTypes = {
         id: PropTypes.number.isRequired,
         name: PropTypes.string.isRequired,
-        photo: PropTypes.string,
+        image: PropTypes.string,
         selectContact: PropTypes.func.isRequired
     }
 
@@ -32,14 +33,14 @@ export default class ContactRow extends Component {
             <TouchableHighlight onPress={() => this.selectContact()} underlayColor='#ddd'>
                 <View style={styles.row}>
                     <Image style={styles.image} source={{
-                        uri: this.props.photo || 'https://cdn0.vox-cdn.com/images/verge/default-avatar.v9899025.gif'
+                      uri: 'http://localhost:8000/api/contact/image/' + this.props.id
                     }}/>
                     <View style={styles.right}>
                         <Text style={styles.name}>
                             {this.props.name}
                         </Text>
                         <Text style={styles.detail}>
-                            {this.props.staffType}
+                            {this.props.phoneNumber}
                         </Text>
                     </View>
                 </View>
@@ -50,11 +51,9 @@ export default class ContactRow extends Component {
 const styles = StyleSheet.create({
     image: {
         margin: 8,
-        width: 50,
-        height: 50,
-        borderRadius: 25,
-        borderColor: '#FF3366',
-        borderWidth: .5
+        width: 40,
+        height: 40,
+        borderRadius: 20
     },
     detail: {
         fontSize: 14,

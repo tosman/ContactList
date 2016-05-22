@@ -18,6 +18,8 @@
     "good-console": "^6.1.1",
     "hapi": "^13.3.0",
     "hapi-auth-cookie": "^6.1.1",
+    "inert": "^4.0.0",
+    "lodash": "^4.12.0",
     "redis-connection": "^4.0.3"
   },
   "devDependencies": {

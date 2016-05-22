@@ -28,6 +28,7 @@
         }
       }
     },
+    { "plugin": "inert" },
     { "plugin": "bell" },
     { "plugin": "hapi-auth-cookie" },
     {

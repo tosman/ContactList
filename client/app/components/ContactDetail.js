@@ -15,6 +15,7 @@ import React, {
     Image
 } from 'react-native';
 import {connect} from 'react-redux';
+import {settings} from '../settings';
 
 class ContactDetail extends Component {
     static propTypes = {
@@ -28,7 +29,7 @@ class ContactDetail extends Component {
             <View style={styles.container}>
                 <View style={styles.headerInfo}>
                     <Image style={styles.image} resizeMode="contain" source={{
-                        uri: this.contact.photo || 'https://cdn0.vox-cdn.com/images/verge/default-avatar.v9899025.gif'
+                        uri: 'http://localhost:8000/api/contact/image/' + this.contact.id
                     }}/>
                 </View>
                 <View style={styles.contactDetails}>

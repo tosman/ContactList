@@ -1,6 +1,6 @@
 import * as types from '../constants/ActionTypes';
 import {settings} from '../settings'
-
+import {Actions} from 'react-native-router-flux';
 
 export function addContact(name)  {
   return {
@@ -110,8 +110,8 @@ export function addContact(data){
         if(response.ok){
           var contact = data;
           contact.id = response.json();
-          dispatch(addContactSucceeded(response.json()))
-          Actions.contactList();
+          dispatch(addContactSucceeded(contact))
+          Actions.pop();
         } else {
           throw 'err';
         }

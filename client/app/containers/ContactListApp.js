@@ -11,6 +11,7 @@ import React, {
     StyleSheet,
     ListView,
     Text,
+    Icon,
     View,
     PropTypes,
     TextInput
@@ -20,7 +21,7 @@ import mapValues from 'lodash/mapValues';
 import * as contactActions from '../actions/contactActionCreators'
 import ContactRow from '../components/ContactRow'
 import {Actions} from 'react-native-router-flux';
-import {ControlledRefreshableListView} from 'react-native-refreshable-listview';
+import ActionButton from 'react-native-action-button';
 
 class ContactListApp extends Component {
 
@@ -47,6 +48,9 @@ class ContactListApp extends Component {
         return (
             <View style={styles.container}>
                 <ListView dataSource={dataSource}  renderRow={(data) => this.renderRow(data)} enableEmptySections={true}/>
+                <ActionButton  buttonColor="#FF3366" onPress={() => Actions.addContact()}>
+
+                </ActionButton>
             </View>
         );
     }
@@ -84,7 +88,6 @@ const mapDispatchToProps = (dispatch) => {
             dispatch(contactActions.requestContactDetail(id));
             Actions.contactDetail(id)
         },
-        addContact: name => dispatch(contactActions.addContact(name)),
         requestContacts: () => contactActions.requestContacts()
     };
 }
